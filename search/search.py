@@ -85,7 +85,5 @@ if __name__ == '__main__':
         page_text = ''
         # sorting the results according to score (highest score first)
     sorted_result = sort_results(file_dict)
-    # print(sorted_result)
     display_results(sorted_result)
 
-    # print(file_dict)
