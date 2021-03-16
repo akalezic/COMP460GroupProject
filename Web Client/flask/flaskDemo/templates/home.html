@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+Here are some of results:
+    {% for result in results %}
+        <article class="media content-section">
+          <div class="media-body">
+              <h1 class="text-muted">{{ result.title }}</h1>
+               <small class="text-muted">{{ result.description }}</small>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
