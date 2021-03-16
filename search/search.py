@@ -22,7 +22,7 @@ def calculate_score(word, word_list, files):
     calculate_idf(files, word)
     # returning probability with laplace smoothing
     #return tf * calculate_idf(files, word)
-    return tf
+    return tf * calculate_idf(files, word)
 
 
 def calculate_idf(all_files, word):
