@@ -34,10 +34,11 @@ class Crawler:
             self.urls_to_visit.append(url)
 
     def crawl(self, url):
+        saved_pages = []
         # count increments every new page is crawled
         self.count += 1
         # it is set to less than 10 so only 10 pages are downloaded
-        if self.count < 12:
+        if self.count < 30:
             # extracting only the domain for setting it to the file name
             # as file name cannot contain characters line '/' and '?'
             html = self.download_url(url)

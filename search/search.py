@@ -18,10 +18,8 @@ def read_file(file_name):
 
 def calculate_score(word, word_list, files):
     count = word_list[word]
+    # returning term frequency with laplace smoothing
     tf = (count + 1) / (2 * len(word_list))
-    calculate_idf(files, word)
-    # returning probability with laplace smoothing
-    #return tf * calculate_idf(files, word)
     return tf * calculate_idf(files, word)
 
 
@@ -33,7 +31,11 @@ def calculate_idf(all_files, word):
         page_text_all = Counter(page_text_all.split())
         if page_text_all[word] != 0:
             document_containing_word = document_containing_word + 1
-    return math.log((total_document+1)/(document_containing_word+1))
+
+    if document_containing_word == 0:
+        return 1
+    else:
+        return math.log((total_document + 1) / (document_containing_word + 1))
 
 
 
