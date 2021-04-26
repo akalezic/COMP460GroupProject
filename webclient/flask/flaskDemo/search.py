@@ -66,42 +66,44 @@ def do_search(search_string):
     #files = glob.glob(root)
 
     files = os.listdir(path)
-
+    print(files)
     for file in files:
         
         score = 0
         page_text = read_file(path + file)
         page_words = Counter(page_text.split())
-        print(page_words)
+
         # adding score for each word in search query
         for i in range(len(query_words)):
             individual_word_score = calculate_score(query_words[i], page_words, files)
             score = score + individual_word_score
-            print(score)
         # converting the file name into url
-        file_url = file[27:]
-        file_url = file_url.replace('.txt', '')
+        
+
+        file_url = file.replace('.txt', '')
+        
+        
         file_url_components = file_url.split("-")
         if len(file_url_components) > 1:
             file_url_final = file_url_components[0] + "/" + file_url_components[1]
         else:
             file_url_final = file_url_components[0]
-
+            
         # adding file url and score to key-value pair
         file_dict[file_url_final] = score
         page_text = ''
         # sorting the results according to score (highest score first)
-    print(file_dict)
+
     sorted_result = sort_results(file_dict)
     #display_results(sorted_result)
     results = list()
 
     for result_sorted in sorted_result:
         result = dict()
-        print(result_sorted)
         result['title'] = result_sorted
-        result['description'] = ""
+        result['description'] = "" 
         results.append(result)
+
     return results
         
 
