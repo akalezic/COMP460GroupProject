@@ -54,7 +54,7 @@ def display_results(dict):
         print(str(rank) + ") " + items + '                      score: ' + str(dict[items]))
 
 def do_search(search_string):
-    root = "../webcrawler/crawledPages/*.txt"
+    root = "../webclient/flask/flaskDemo/crawledPages/*.txt"
 
     file_url_components = []
     file_dict = {}
@@ -72,11 +72,12 @@ def do_search(search_string):
         score = 0
         page_text = read_file(path + file)
         page_words = Counter(page_text.split())
-
+        print(page_words)
         # adding score for each word in search query
         for i in range(len(query_words)):
             individual_word_score = calculate_score(query_words[i], page_words, files)
             score = score + individual_word_score
+            print(score)
         # converting the file name into url
         file_url = file[27:]
         file_url = file_url.replace('.txt', '')
@@ -90,9 +91,18 @@ def do_search(search_string):
         file_dict[file_url_final] = score
         page_text = ''
         # sorting the results according to score (highest score first)
+    print(file_dict)
     sorted_result = sort_results(file_dict)
     #display_results(sorted_result)
-    return sorted_result
+    results = list()
+
+    for result_sorted in sorted_result:
+        result = dict()
+        print(result_sorted)
+        result['title'] = result_sorted
+        result['description'] = ""
+        results.append(result)
+    return results
         
 
 if __name__ == '__main__':
